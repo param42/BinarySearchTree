@@ -25,17 +25,9 @@ template <typename T>
 std::istream & operator >> (std::istream & in, BinarySearchTree<T> & tree)
 {
 	T value;
-	int size;
-	std::cout << "Size: ";
-	if (in >> size) {
-		for (int i = 0; i < size; i++)
-		{
-			if (in >> value) {
-				tree.insert(value);
-			}
-		}
-	}
-	return in;
+        while (in >> value)
+        	tree.insert(value);
+        return in;
 };
 
 template<typename T>
