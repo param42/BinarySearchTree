@@ -1,4 +1,8 @@
-
+#ifndef BINARYSEARCHTREE_BINARYSEARCHTREE_H
+#define BINARYSEARCHTREE_BINARYSEARCHTREE_H
+#include <iostream>
+#include <cstddef>
+#include <fstream>
 template<typename T>
 class BinarySearchTree;
 
@@ -157,3 +161,4 @@ public:
 		direct_walk(str, now_node->right_);
 	}
 };
+#endif //BINARYSEARCHTREE_BINARYSEARCHTREE_H
