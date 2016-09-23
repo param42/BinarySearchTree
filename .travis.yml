@@ -1,8 +1,14 @@
 language: cpp
-
 compiler:
-- gcc
-script:
-- mkdir build
-- cd build
- 
+  - clang
+  - gcc
+  
+addons:
+  apt:
+    packages:
+      - cmake
+  
+script: 
+  - mkdir build
+  - cd build 
+  - cmake .. && make
