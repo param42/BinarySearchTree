@@ -1,4 +1,4 @@
-#inlcude "BinarySearchTree.h"
+#include "BinarySearchTree.h"
 
 int main()
 {
