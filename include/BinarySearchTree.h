@@ -1,12 +1,20 @@
-#ifndef BINARYSEARCHTREE_BINARYSEARCHTREE_H
-#define BINARYSEARCHTREE_BINARYSEARCHTREE_H
-#include <iostream>
-#include <cstddef>
-#include <fstream>
+
 template<typename T>
 class BinarySearchTree;
 
+/*
+операртор перемещения+, копирования, сравнения
+>> istram
+конструкторы перемещения, копироваания 
 
+добавить симметричный и исполььовать его в одно из операторов +
+
+o
+is
+of
+
+732
+*/
 template <typename T>
 std::ofstream & operator << (std::ofstream & out, const BinarySearchTree<T> & tree)
 {
@@ -17,7 +25,7 @@ std::ofstream & operator << (std::ofstream & out, const BinarySearchTree<T> & tr
 template <typename T>
 std::ostream & operator << (std::ostream & out, const BinarySearchTree<T> & tree)
 {
-	tree.direct_walk(out, tree.GetRoot());
+	tree.symmetric_walk(out, tree.GetRoot());
 	return out;
 };
 
@@ -25,28 +33,42 @@ template <typename T>
 std::istream & operator >> (std::istream & in, BinarySearchTree<T> & tree)
 {
 	T value;
-        while (in >> value)
-        	tree.insert(value);
-        return in;
+	while (in >> value) tree.insert(value);
+	return in;
 };
 
 template<typename T>
 class BinarySearchTree
 {
 public:
-	struct  Node{
-		T value_; 
+	class  Node{
+	public:
+		T value_;
 		Node * left_;
 		Node * right_;
 		Node(T value) : value_(value), left_(nullptr), right_(nullptr) {};
-			~Node()
-			{
-				delete left_;
-				delete right_;
+		Node*  copy(){
+			Node* nNode = new Node(value_);
+			if (left_){
+				nNode->left_ = left_->copy();
 			}
+			if (right_){
+				nNode->right_ = right_->copy();
+			}
+			return nNode;
+		}
+
+		
+		~Node()
+		{
+			if (this->left_)
+				delete this->left_;
+			if (this->right_)
+				delete this->right_;
+		}
+		
 	};
-	
-	Node* root_; 
+	Node* root_;
 	size_t size_;
 
 	BinarySearchTree()
@@ -64,18 +86,33 @@ public:
 		};
 
 	};
-	
+
+	BinarySearchTree(BinarySearchTree&& rtree){
+		size_ = rtree.size_;
+		root_ = rtree.root_;
+		rtree.root_ = nullptr;
+		rtree.size_ = 0;
+	}
+	BinarySearchTree(const BinarySearchTree& tree){	
+		size_ = tree.size_;
+		root_ = tree.root_->copy();
+	}
+
 	Node* GetRoot() const
 	{
 		return root_;
 	}
+
+	
+
+
 	~BinarySearchTree()
 	{
 		delete root_;
 	};
 
 
-	size_t size() 
+	size_t size()
 	{
 		return size_;
 	};
@@ -92,6 +129,7 @@ public:
 			size_++;
 			return true;
 		}
+
 		while (this_node)
 		{
 			my_node = this_node;
@@ -145,12 +183,55 @@ public:
 		return nullptr;
 	};
 
-	void direct_walk(std::ostream & str, Node *now_node) const //Прямой обход 
+	BinarySearchTree<T>& operator = (const BinarySearchTree<T> & tree){//присваивания
+		delete root_;
+		this->root_ = tree.root_->copy();
+		this->size_ = tree.size_;
+		return *this;// ?
+	}
+	BinarySearchTree<T>& operator = (BinarySearchTree<T> && tree){//оператор присваивания для rvalue  move перемещения
+		if (this != &tree){
+			size_ = std::move(tree.size_);
+			root_ = std::move(tree.root_);
+			tree.size_ = 0;
+			tree.root_ = nullptr;
+		}
+		/*delete root_;
+		this->size_= tree.size_;
+		this->root_ = tree.root_;
+		tree.root_ = nullptr;
+		tree.size_ = 0;*/
+		return *this;
+	}
+	bool operator == (const BinarySearchTree<T> & tree){
+		if (this == &tree) return true;
+
+		return srav(root_,tree.root_);
+	}
+
+	bool srav(Node* Fnode, Node* Snode){
+		if (Ftree){
+			return (Snode && Fnode->value_ == Snode->value_ && srav(Fnode->left_, Snode->left_) && srav(Fnode->right_, Snode_->right_));
+		}
+		else return false;
+	}
+
+	void direct_walk(std::ostream & str, Node *now_node) const
 	{
 		if (!now_node) { return; }
 		str << now_node->value_ << " ";
 		direct_walk(str, now_node->left_);
 		direct_walk(str, now_node->right_);
 	}
+	void symmetric_walk(std::ostream & out, Node * node) const
+	{
+		if (!node)
+			return;
+
+		symmetric_walk(out,node->left_);
+		out << node->value_ << "  ";
+		symmetric_walk(out,node->right_);
+	}
+
+
 };
-#endif //BINARYSEARCHTREE_BINARYSEARCHTREE_H
