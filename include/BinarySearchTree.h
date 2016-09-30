@@ -170,11 +170,23 @@ public:
 		return nullptr;
 	};
 
-	BinarySearchTree<T>& operator = (const BinarySearchTree<T> & tree){//присваивания
-		delete root_;
-		this->root_ = tree.root_->copy();
-		this->size_ = tree.size_;
-		return *this;// ?
+	BinarySearchTree<T>& operator = (const BinarySearchTree<T> & tree){//копирования
+		
+		 if (this == &tree)
+        		return *this;
+
+    				if (tree.root_)
+  				  {
+      					 root_ = tree.root_->copy();
+   				 }
+ 				   else
+   				 {
+      					  delete root_;
+       					 root_ = nullptr;
+  				  }
+
+   			 size_ = tree.size_;
+    		return *this;	 
 	}
 	BinarySearchTree<T>& operator = (BinarySearchTree<T> && tree){//оператор присваивания для rvalue  move перемещения
 		if (this != &tree){
