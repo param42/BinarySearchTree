@@ -175,18 +175,9 @@ public:
 		 if (this == &tree)
         		return *this;
 
-    				if (tree.root_)
-  				  {
-      					 root_ = tree.root_->copy();
-   				 }
- 				   else
-   				 {
-      					  delete root_;
-       					 root_ = nullptr;
-  				  }
-
-   			 size_ = tree.size_;
-    		return *this;	 
+      			root_ = tree.root_->copy();
+   			size_ = tree.size_;
+    			return *this;	 
 	}
 	BinarySearchTree<T>& operator = (BinarySearchTree<T> && tree){//оператор присваивания для rvalue  move перемещения
 		if (this != &tree){
