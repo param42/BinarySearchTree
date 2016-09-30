@@ -1,14 +1,14 @@
 #include "../include/BinarySearchTree.h"
 #include "catch.h"
 
-SCENARIO("if element is in tree, find method must return it's pointer") 
+SCENARIO("if_element_in_tree method must return it's pointer") 
 {
-    GIVEN("tree") 
+    GIVEN("tree_not_zero") 
     {
         BinarySearchTree<int> tree{1, 4, 5};
         WHEN("find") 
         {
-            THEN("return pointer to element must not be nullptr") 
+            THEN("return pointer to element must not nullptr") 
             {
                 REQUIRE(*(tree.find(4)) == 4);
             }
