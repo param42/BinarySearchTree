@@ -8,7 +8,7 @@ SCENARIO("if_element_in_tree method must return it's pointer")
         BinarySearchTree<int> tree{1, 4, 5};
         WHEN("find") 
         {
-            THEN("return pointer to element must not nullptr") 
+            THEN("must not nullptr") 
             {
                 REQUIRE(*(tree.find(4)) == 4);
             }
@@ -16,14 +16,14 @@ SCENARIO("if_element_in_tree method must return it's pointer")
     }
 }
 
-SCENARIO("if element is not in tree, find method must return nullptr") 
+SCENARIO("if element not in tree, method must return null") 
 {
     GIVEN("tree") 
     {
         BinarySearchTree<int> tree{1, 4, 5};
         WHEN("find") 
         {
-            THEN("return pointer to element must be nullptr") 
+            THEN("must be nullptr") 
             {
                 REQUIRE(tree.find(2) == nullptr);
             }
@@ -31,9 +31,9 @@ SCENARIO("if element is not in tree, find method must return nullptr")
     }
 }
 
-SCENARIO("find method must work for constant tree and non-constant tree") 
+SCENARIO("method must work for constant and not constant tree") 
 {
-    GIVEN("constant and non-constant tree") 
+    GIVEN("constant and nt constant tree") 
     {
         const BinarySearchTree<int> tree1{1, -2, 0};
         BinarySearchTree<int> tree2{1, 4, 5};
