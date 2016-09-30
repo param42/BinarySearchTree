@@ -196,8 +196,8 @@ public:
 	}
 
 	bool srav(Node* Fnode, Node* Snode){
-		if (Fnode&&Snode){
-			return (Fnode->value_ == Snode->value_ && srav(Fnode->left_, Snode->left_) && srav(Fnode->right_, Snode->right_));
+		if (Fnode){
+			return (Snode&&Fnode->value_ == Snode->value_ && srav(Fnode->left_, Snode->left_) && srav(Fnode->right_, Snode->right_));
 		}
 		else return false;
 	}
