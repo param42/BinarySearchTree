@@ -196,10 +196,16 @@ public:
 	}
 
 	bool srav(Node* Fnode, Node* Snode){
-		if (Fnode){
-			return (Snode&&Fnode->value_ == Snode->value_ && srav(Fnode->left_, Snode->left_) && srav(Fnode->right_, Snode->right_));
+	
+		if (Fnode == nullptr && Snode == nullptr) return true;
+		else 
+			if (Fnode != nullptr && Snode != nullptr)
+		{
+			return( Fnode->value_ == Snode->value_ && compare(Fnode->left_, Snode->left_) && compare(Fnode->right_, Snode->right_));
 		}
-		else return false;
+		else return(false);
+		
+		
 	}
 
 	void direct_walk(std::ostream & str, Node *now_node) const
