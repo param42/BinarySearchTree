@@ -2,19 +2,6 @@
 template<typename T>
 class BinarySearchTree;
 
-/*
-операртор перемещения+, копирования, сравнения
->> istram
-конструкторы перемещения, копироваания 
-
-добавить симметричный и исполььовать его в одно из операторов +
-
-o
-is
-of
-
-732
-*/
 template <typename T>
 std::ofstream & operator << (std::ofstream & out, const BinarySearchTree<T> & tree)
 {
