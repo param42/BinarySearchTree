@@ -203,7 +203,7 @@ public:
 		{
 			return( Fnode->value_ == Snode->value_ && compare(Fnode->left_, Snode->left_) && compare(Fnode->right_, Snode->right_));
 		}
-		else return(false);
+		else return false;
 		
 		
 	}
