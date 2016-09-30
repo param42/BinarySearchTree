@@ -178,16 +178,12 @@ public:
 	}
 	BinarySearchTree<T>& operator = (BinarySearchTree<T> && tree){//оператор присваивания для rvalue  move перемещения
 		if (this != &tree){
-			size_ = std::move(tree.size_);
-			root_ = std::move(tree.root_);
+			size_ =  tree.size_ ;
+			root_ =  tree.root_ ;
 			tree.size_ = 0;
 			tree.root_ = nullptr;
 		}
-		/*delete root_;
-		this->size_= tree.size_;
-		this->root_ = tree.root_;
-		tree.root_ = nullptr;
-		tree.size_ = 0;*/
+		 
 		return *this;
 	}
 	bool operator == (const BinarySearchTree<T> & tree){
