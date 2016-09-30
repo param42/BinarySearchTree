@@ -1,6 +1,6 @@
-SCENARIO("if element is (or not) in tree, insert method must return false (or true)") 
+SCENARIO("if element is in tree, insert method must return false, if element is in not in tree, insert method must return true") 
 {
-    GIVEN("tree")
+    GIVEN("tree not zero")
     {
         BinarySearchTree<int> tree{1, 3, 5, -1};
         WHEN("insert element")
@@ -14,7 +14,7 @@ SCENARIO("if element is (or not) in tree, insert method must return false (or tr
     }
 }
 
-SCENARIO("if inserted value is lesser (or bigger) than the value of root, inserted value must be inserted on the left (or right) from root") 
+SCENARIO("") 
 {
     GIVEN("four trees")
     {
