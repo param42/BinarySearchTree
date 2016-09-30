@@ -201,7 +201,7 @@ public:
 		else 
 			if (Fnode != nullptr && Snode != nullptr)
 		{
-			return( Fnode->value_ == Snode->value_ && compare(Fnode->left_, Snode->left_) && compare(Fnode->right_, Snode->right_));
+			return( Fnode->value_ == Snode->value_ && srav(Fnode->left_, Snode->left_) && srav(Fnode->right_, Snode->right_));
 		}
 		else return false;
 		
