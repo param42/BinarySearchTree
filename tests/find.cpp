@@ -1,47 +1,48 @@
-#include "../include/BinarySearchTree.h"
-#include "catch.h"
+#include "catch.hpp"
+#include "BinarySearchTree.hpp"
 
-SCENARIO("if_element_in_tree method must return it's pointer") 
+SCENARIO("If element exist in tree, find() must return ptr on it")
 {
-    GIVEN("tree_not_zero") 
-    {
-        BinarySearchTree<int> tree{1, 4, 5};
-        WHEN("find") 
-        {
-            THEN("must not nullptr") 
-            {
-                REQUIRE(*(tree.find(4)) == 4);
-            }
-        }
-    }
+   GIVEN("Tree with existing element")
+   {
+      BinarySearchTree<int> tree { 8,10,3};
+      WHEN("Decide existance")
+      {
+         THEN("Method must return ptr on 10")
+         {
+            REQUIRE(*tree.find(10) == 10);
+         }
+      }
+   }
 }
 
-SCENARIO("if element not in tree, method must return null") 
+SCENARIO("If element does not exist in tree, find() must return nullptr")
 {
-    GIVEN("tree") 
-    {
-        BinarySearchTree<int> tree{1, 4, 5};
-        WHEN("find") 
-        {
-            THEN("must be nullptr") 
-            {
-                REQUIRE(tree.find(2) == nullptr);
-            }
-        }
-    }
+   GIVEN("Tree witn non-existing element")
+   {
+      BinarySearchTree<int> tree { 8,10,3 };
+      WHEN("Decide existance")
+      {
+         THEN("Method must return nullptr")
+         {
+            REQUIRE(tree.find(7) == nullptr);
+         }
+      }
+   }
 }
 
-SCENARIO("method must work for constant and not constant tree") 
+SCENARIO("find() must support const and non-const objects")
 {
-    GIVEN("constant and nt constant tree") 
+    GIVEN("const and non-const tree")
     {
-        const BinarySearchTree<int> tree1{1, -2, 0};
-        BinarySearchTree<int> tree2{1, 4, 5};
-        WHEN("find") 
+        const BinarySearchTree<int> tree1 { 8,10,3 };
+        BinarySearchTree<int> tree2 { 7,9,2 };
+        WHEN("Decide existance")
         {
-            THEN("return element for constant and non-constant tree") 
+            THEN("Method must find elements")
             {
-                REQUIRE(tree1.find(-2) && tree2.find(1));
+               REQUIRE(tree1.find(10));
+               REQUIRE(tree2.find(9));
             }
         }
     }
