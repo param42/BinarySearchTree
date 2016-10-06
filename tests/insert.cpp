@@ -1,67 +1,98 @@
-SCENARIO("if element is in tree, insert method must return false, if element is in not in tree, insert method must return true") 
+#include "catch.hpp"
+#include "BinarySearchTree.hpp"
+
+SCENARIO("If inserting element already exist in tree, insert() must return false")
 {
-    GIVEN("tree not zero")
-    {
-        BinarySearchTree<int> tree{1, 3, 5, -1};
-        WHEN("insert element")
-        {
-            THEN("sizes must be equal")
-            {
-                REQUIRE(!tree.insert(1));
-                REQUIRE(tree.insert(0));
-            }
-        }
-    }
+   GIVEN("Tree with existing element")
+   {
+      BinarySearchTree<int> tree { 8,10,3};
+      WHEN("Inserting")
+      {
+         THEN("Method must return false")
+         {
+            REQUIRE(tree.insert(10) == false);
+         }
+      }
+   }
 }
 
-SCENARIO("") 
+SCENARIO("If inserting element does not exist in tree, insert() must return true")
 {
-    GIVEN("four trees")
-    {
-        BinarySearchTree<int> tree1{1, 3, -1};
-        BinarySearchTree<int> tree2{1, 3};
-        BinarySearchTree<int> tree3{1, 2, 5};
-        BinarySearchTree<int> tree4{1, 2};
-        WHEN("insert value that is lesser than the root value")
-        {
-            tree2.insert(-1);
-            THEN("value must be inserted on the left from the root")
-            {
-                REQUIRE(tree1 == tree2);
-            }
-        }
-        WHEN("insert element")
-        {
-            tree4.insert(-1);
-            THEN("value must be inserted on the right from the root")
-            {
-                REQUIRE(tree3 == tree4);
-            }
-        }
-    }
+   GIVEN("Tree with non-existing element")
+   {
+      BinarySearchTree<int> tree { 8,10,3};
+      WHEN("Inserting")
+      {
+         THEN("Method must return true")
+         {
+            REQUIRE(tree.insert(7));
+         }
+      }
+   }
 }
 
-SCENARIO("if element is (or not) in tree, size must increase by one (or not change)") 
+SCENARIO("If inserting element is lesser than root of the tree, it must be inserted left from root")
 {
-    GIVEN("tree, its size")
-    {
-        BinarySearchTree<int> tree{1, 3, 5, -1};
-        size_t size = tree.size();
-        WHEN("insert element that is not in the tree")
-        {
-            tree.insert(2);
-            THEN("sizes must increase by one")
-            {
-                REQUIRE(tree.size() == size + 1);
-            }
-        }
-        WHEN("insert element that is in the tree")
-        {
-            tree.insert(3);
-            THEN("sizes must be equal")
-            {
-                REQUIRE(tree.size() == size);
-            }
-        }
-    }
+   GIVEN("Tree with bigger root and tree with inserted element")
+   {
+      BinarySearchTree<int> tree1 { 10 };
+      BinarySearchTree<int> tree2 { 10, 8 };
+      WHEN("Inserting")
+      {
+         tree1.insert(8);
+         THEN("Element must be inserted left from root")
+         {
+            REQUIRE(tree1 == tree2);
+         }
+      }
+   }
+}
+
+SCENARIO("If inserting element is bigger than root of the tree, it must be inserted right from root")
+{
+   GIVEN("Tree with lesser root and tree with inserted element")
+   {
+      BinarySearchTree<int> tree1 { 10 };
+      BinarySearchTree<int> tree2 { 10, 12 };
+      WHEN("Inserting")
+      {
+         tree1.insert(12);
+         THEN("Element must be inserted right from root")
+         {
+            REQUIRE(tree1 == tree2);
+         }
+      }
+   }
+}
+
+SCENARIO("If inserting element already exist in tree, insert() must not change size of tree")
+{
+   GIVEN("Tree with existing element")
+   {
+      BinarySearchTree<int> tree { 8,10,3};
+      WHEN("Inserting")
+      {
+         tree.insert(10);
+         THEN("Method must not change size of tree")
+         {
+            REQUIRE(tree.size() == 3);
+         }
+      }
+   }
+}
+
+SCENARIO("If inserting element does not exist in tree, insert() must increment size of tree")
+{
+   GIVEN("Tree with non-existing element")
+   {
+      BinarySearchTree<int> tree { 8,10,3};
+      WHEN("Inserting")
+      {
+         tree.insert(7);
+         THEN("Method must increment size of tree")
+         {
+            REQUIRE(tree.size() == 4);
+         }
+      }
+   }
 }
