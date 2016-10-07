@@ -1,7 +1,20 @@
 
 template<typename T>
 class BinarySearchTree;
- 
+
+/*
+операртор перемещения+, копирования, сравнения
+>> istram
+конструкторы перемещения, копироваания 
+
+добавить симметричный и исполььовать его в одно из операторов +
+
+o
+is
+of
+
+732
+*/
 template <typename T>
 std::ofstream & operator << (std::ofstream & out, const BinarySearchTree<T> & tree)
 {
@@ -238,47 +251,25 @@ public:
 				 node=nullptr;
 			}
 			else {
-				std::shared_ptr<Node> newnode;
-
-			
-				if (node->left_ && node->right_)
-					{
+				std::shared_ptr<Node> newnode=nullptr;//
+				if (node->left_ != nullptr) {
+					newnode = Rightmost(node->left_);
+				}
+				else
 					newnode = Leftmost(node->right_);
-					
-					newnode->parent_ = node->parent_;
-					if (Leftmost(node->right_) == node->right_){
-						newnode->right_ = node->right_->right_;
+
+				if (node->parent_->left_ == node){
+
+					newnode->right_ = node->right_;
+					node->parent_->left_ = newnode;
+
 					}
-					else{
-						newnode->right_ = node->right_;
-					}
+				else{
 					newnode->left_ = node->left_;
-					
-					
-					if (node->parent_->right_ = node){
-						newnode->parent_->right_ = newnode;
-					}
-					else{
-						newnode->parent_->left_ = newnode;
-					}
-
+					node->parent_->right_ = newnode;
 				}
-				else 
-				{	//node->right_ || node->left_
-					
-					if (node->right_){
-						node->parent_->right_ = node->right_;
-					}
-					if (node->left_){
-						node->parent_->left_ = node->left_;
-					}
-
-				}
-				 
- 
-
-
- 				node=nullptr;
+				
+				node=nullptr;
 
 			}
 		}
