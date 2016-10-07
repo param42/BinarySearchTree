@@ -238,25 +238,47 @@ public:
 				 node=nullptr;
 			}
 			else {
-				std::shared_ptr<Node> newnode=nullptr;//
-				if (node->left_ != nullptr) {
-					newnode = Rightmost(node->left_);
-				}
-				else
+				std::shared_ptr<Node> newnode;
+
+			
+				if (node->left_ && node->right_)
+					{
 					newnode = Leftmost(node->right_);
-
-				if (node->parent_->left_ == node){
-
-					newnode->right_ = node->right_;
-					node->parent_->left_ = newnode;
-
+					
+					newnode->parent_ = node->parent_;
+					if (Leftmost(node->right_) == node->right_){
+						newnode->right_ = node->right_->right_;
 					}
-				else{
+					else{
+						newnode->right_ = node->right_;
+					}
 					newnode->left_ = node->left_;
-					node->parent_->right_ = newnode;
+					
+					
+					if (node->parent_->right_ = node){
+						newnode->parent_->right_ = newnode;
+					}
+					else{
+						newnode->parent_->left_ = newnode;
+					}
+
 				}
-				
-				node=nullptr;
+				else 
+				{	//node->right_ || node->left_
+					
+					if (node->right_){
+						node->parent_->right_ = node->right_;
+					}
+					if (node->left_){
+						node->parent_->left_ = node->left_;
+					}
+
+				}
+				 
+ 
+
+
+ 				node=nullptr;
 
 			}
 		}
