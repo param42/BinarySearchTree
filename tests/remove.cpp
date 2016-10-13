@@ -61,8 +61,8 @@
                 }
              }
         
-            bst1 = BinarySearchTree<int> ({ 10});
-            bst2 = BinarySearchTree<int> ();
+            bst1 = BinarySearchTree<int>({ 10,15,5 });
+	          bst2 = BinarySearchTree<int>({ 15,5 });
              WHEN("remove root")
             {
                bst1.remove(bst1.root_,10);
