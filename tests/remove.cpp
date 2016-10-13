@@ -21,7 +21,7 @@
             bst2 = BinarySearchTree<int> ({ 10,15,14,16,20,25,7,30});
              WHEN("remove node that has only right child")
             {
-              bst1.remove(bst1.root_,17);
+              bst1.remove(bst1.root_,16);
               THEN("trees must be equal")
                 {
                   REQUIRE(bst1==bst2);
