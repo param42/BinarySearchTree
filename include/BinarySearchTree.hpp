@@ -114,7 +114,7 @@ public:
 	};
 
 
-	size_t size()
+	const size_t size()
 	{
 		return size_;
 	};
@@ -251,6 +251,7 @@ public:
 					newnode->right_ = node->right_;
 					Leftmost(node->right_)->parent_->left_ = nullptr;
 				}
+				newnode->left_ = node->left_;
 				root_ = newnode;
 				newnode->parent_ = nullptr;
 				node = nullptr;
@@ -269,15 +270,14 @@ public:
 				if (node->left_ && node->right_)
 				{
 					newnode = Leftmost(node->right_);
-					Leftmost(node->right_)->parent_->left_ = Leftmost(node->right_)->right_;
 					newnode->parent_ = node->parent_;
 					
 					if (newnode == node->right_) {
 						newnode->right_ = node->right_->right_;
+						 
 					}
 					else {//b
-						newnode->right_ = node->right_;
-						 
+						newnode->right_ = node->right_;	 
 					}
 					newnode->left_ = node->left_;
 
@@ -286,9 +286,11 @@ public:
 
 						if (node->parent_->right_ = node) {
 							newnode->parent_->right_ = newnode;
+							
 						}
 						else {
 							newnode->parent_->left_ = newnode;
+						  
 						}
 					}
 					else {
