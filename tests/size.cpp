@@ -1,49 +1,46 @@
+#include "../include/BinarySearchTree.hpp"
 #include "catch.hpp"
-#include "BinarySearchTree.hpp"
 
-SCENARIO("Size of empty tree must be equal 0")
+SCENARIO( "size of empty tree must be equal to 0")
 {
-    GIVEN("Empty tree")
+    GIVEN("empty tree")
     {
         BinarySearchTree<int> tree;
-        WHEN("Decide size")
+        WHEN("decide size")
         {
-            THEN("Size must be equal 0")
+            THEN("size must be equal to 0")
             {
                 REQUIRE(tree.size() == 0);
             }
         }
     }
 }
-
-SCENARIO("Size of not empty tree must not be equal 0")
+SCENARIO("size of non-empty tree mustn't be equal to 0")
 {
-    GIVEN("Not empty tree")
+    GIVEN("not empty tree")
     {
-        BinarySearchTree<int> tree { 8,10,3,14,6,1,7,13,4 };
-        WHEN("Decide size")
+        BinarySearchTree<int> tree{2, 6, 4};
+        WHEN("decide size")
         {
-            THEN("Size must not be equal 0")
+            THEN("size must be not equal to 0")
             {
                 REQUIRE(tree.size() != 0);
             }
         }
     }
 }
-
-SCENARIO("size() must support const and non-const objects")
+SCENARIO("size of constant tree must be equal to size of non-constant tree")
 {
-    GIVEN("const and non-const tree")
+    GIVEN("2 trees: constant and non-constant")
     {
-        const BinarySearchTree<int> tree1 { 8,10,3 };
-        BinarySearchTree<int> tree2 { 7,9,2 };
-        WHEN("Decide size")
+        BinarySearchTree<int> tree1{1, 3, 7};
+        const BinarySearchTree<int> tree2{2, 6, 4};
+        WHEN("compare sizes")
         {
-            THEN("Size must be equal")
+            THEN("sizes must be equal")
             {
                 REQUIRE(tree1.size() == tree2.size());
             }
         }
     }
 }
-
