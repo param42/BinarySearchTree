@@ -28,11 +28,11 @@
                 }
              }
              
-             bst1 = BinarySearchTree<int> ({ 10,20,30,15,14,40});
-             bst2 = BinarySearchTree<int> ({ 10,20,30,14,40});
+             bst1 = BinarySearchTree<int> ({ 10,20});
+             bst2 = BinarySearchTree<int> ({ 20});
              WHEN("remove node that has only left child")
             {
-               bst1.remove(bst1.root_,15);
+               bst1.remove(bst1.root_,10);
               THEN("trees must be equal")
                 {
                   REQUIRE(bst1==bst2);
