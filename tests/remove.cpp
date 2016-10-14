@@ -61,7 +61,7 @@
                 }
              }
         
-            bst1 = BinarySearchTree<int>({ 10,20);
+            bst1 = BinarySearchTree<int>({ 10,20});
 	    bst2 = BinarySearchTree<int>({ 20});
              WHEN("remove root")
             {
