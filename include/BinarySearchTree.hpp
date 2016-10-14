@@ -227,18 +227,21 @@ public:
 		return true;
 	}
 
+	bool remove(const T value) {
+		return remove_r(root_, value);
+	}
 
 
-	void remove(std::shared_ptr<Node> node, int value)
+	bool remove_r(std::shared_ptr<Node> node, int value)
 	{
 
 		if (node == nullptr)
-			return;
+			return true;
 
 		if (value < node->value_)
-			return remove(node->left_, value);
+			return remove_r(node->left_, value);
 		else if (value > node->value_)
-			return remove(node->right_, value);
+			return remove_r(node->right_, value);
 		else {
 
 			if (node == root_) {
@@ -247,7 +250,7 @@ public:
 				if (Leftmost(node->right_) == node->right_) {
 					newnode->right_ = node->right_->right_;
 				}
-				else {//b
+				else {
 					newnode->right_ = node->right_;
 					Leftmost(node->right_)->parent_->left_ = nullptr;
 				}
@@ -255,7 +258,7 @@ public:
 				root_ = newnode;
 				newnode->parent_ = nullptr;
 				node = nullptr;
-				return;
+				return true;
 			}
 
 			if (node->left_ == nullptr && node->right_ == nullptr) {
@@ -263,7 +266,8 @@ public:
 					node->parent_->left_ = nullptr;
 				else
 					node->parent_->right_ = nullptr;
-				node = nullptr;//2
+				node = nullptr;
+				return true;
 			}
 			else {
 				std::shared_ptr<Node> newnode;
@@ -276,13 +280,13 @@ public:
 						newnode->right_ = node->right_->right_;
 
 					}
-					else {//b
+					else {
 						newnode->right_ = node->right_;
 					}
 					newnode->left_ = node->left_;
 
 
-					if (node != root_) {
+					
 
 						if (node->parent_->right_ = node) {
 							newnode->parent_->right_ = newnode;
@@ -292,15 +296,11 @@ public:
 							newnode->parent_->left_ = newnode;
 
 						}
-					}
-					else {
-						root_ = newnode;
-					}
-
+					
 
 				}
 				else
-				{	//node->right_ || node->left_   
+				{	 
 
 					if (node->right_) {				
 						node->parent_->right_ = node->right_;
@@ -311,7 +311,7 @@ public:
 
 				}
 				node = nullptr;
-
+				return true;
 			}
 		}
 	}
