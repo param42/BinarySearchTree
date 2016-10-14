@@ -22,11 +22,7 @@ matrix:
             - cmake
           sources: &sources
             - llvm-toolchain-precise
-            - ubuntu-toolchain-r-test
-    - os: osx
-      compiler: clang-3.8
-      env: COMPILER=clang++ -std=c++11
-      
+            - ubuntu-toolchain-r-test     
 script:
   - mkdir build
   - cd build
