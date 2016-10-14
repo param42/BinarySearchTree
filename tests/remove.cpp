@@ -18,7 +18,7 @@
              }
              
             bst1 = BinarySearchTree<int> ({ 10,20,30,15,14,40});
-            bst2 = BinarySearchTree<int> ({ 10,20,15,14,40};);
+            bst2 = BinarySearchTree<int> ({ 10,20,15,14,40});
              WHEN("remove node that has only right child")
             {
               bst1.remove(bst1.root_,30);
