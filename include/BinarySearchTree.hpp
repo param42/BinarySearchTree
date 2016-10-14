@@ -67,7 +67,7 @@ public:
 
 		~Node()
 		{
-		 
+
 			left_ = nullptr;
 			right_ = nullptr;
 			parent_ = nullptr;
@@ -211,14 +211,14 @@ public:
 		return *this;
 	}
 	bool operator == (const BinarySearchTree<T> & tree) {
-	
+
 		if (this == &tree) return true;
 
 		return srav(root_, tree.root_);
 	}
 
 	bool srav(std::shared_ptr<Node> Fnode, std::shared_ptr<Node> Snode) {
-		if (Fnode!=nullptr && Snode !=nullptr) {
+		if (Fnode != nullptr && Snode != nullptr) {
 			return (Fnode->value_ == Snode->value_ && srav(Fnode->left_, Snode->left_) && srav(Fnode->right_, Snode->right_));
 		}
 		if ((Fnode != nullptr && Snode == nullptr) || (Fnode == nullptr && Snode != nullptr)) {
@@ -242,8 +242,8 @@ public:
 		else {
 
 			if (node == root_) {
-				std::shared_ptr<Node> newnode=Leftmost(node->right_);
-				
+				std::shared_ptr<Node> newnode = Leftmost(node->right_);
+
 				if (Leftmost(node->right_) == node->right_) {
 					newnode->right_ = node->right_->right_;
 				}
@@ -271,13 +271,13 @@ public:
 				{
 					newnode = Leftmost(node->right_);
 					newnode->parent_ = node->parent_;
-					
+
 					if (newnode == node->right_) {
 						newnode->right_ = node->right_->right_;
-						 
+
 					}
 					else {//b
-						newnode->right_ = node->right_;	 
+						newnode->right_ = node->right_;
 					}
 					newnode->left_ = node->left_;
 
@@ -286,32 +286,32 @@ public:
 
 						if (node->parent_->right_ = node) {
 							newnode->parent_->right_ = newnode;
-							
+
 						}
 						else {
 							newnode->parent_->left_ = newnode;
-						  
+
 						}
 					}
 					else {
 						root_ = newnode;
 					}
-					
+
 
 				}
 				else
 				{	//node->right_ || node->left_   
 
-					if (node->right_) {
-						node->parent_->left_ = node->right_;
+					if (node->right_) {				
+						node->parent_->right_ = node->right_;
 					}
 					if (node->left_) {
-						node->parent_->right_ = node->left_;
+						node->parent_->left_ = node->left_;
 					}
 
 				}
 				node = nullptr;
-				
+
 			}
 		}
 	}
@@ -323,7 +323,7 @@ public:
 		}
 		return node;
 	}
- 
+
 
 
 
