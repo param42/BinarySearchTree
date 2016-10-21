@@ -54,7 +54,7 @@
             bst2 = BinarySearchTree<int>({ 10,20,30,15,14,40});
              WHEN("remove node that doesn't exist")
             {
-               bst1.remove(200);
+               
               THEN("except")
                 {
                   REQUIRE_THROWS_AS(bst1.remove(6), BinarySearchTree<int>::except);
