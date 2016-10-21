@@ -36,8 +36,8 @@ class BinarySearchTree
 public:
 	
 	class except: public std::logic_error{
-    public:
-        except(const std::string& data, T ) : logic_error(data){}
+   	 public:
+      	  except(const std::string& data, T ) : logic_error(data){}
   	  };
 
 	
@@ -150,7 +150,7 @@ public:
 			my_node = this_node;
 			if (value == my_node->value_)
 			{
-				return false;
+				throw except("This node is already exists", value);
 			}
 			else if (value < my_node->value_)
 			{
@@ -181,7 +181,7 @@ public:
 		auto this_node = root_;
 		if (size_ == 0)
 		{
-			return nullptr;
+			throw except("Tree is empty", value);
 		};
 		while (this_node)
 		{
@@ -198,7 +198,7 @@ public:
 				return std::make_shared<T>(this_node->value_);
 			}
 		}
-		return nullptr;
+		throw except("The node cannot be found", value);
 	};
 
 	BinarySearchTree<T>& operator = (const BinarySearchTree<T> & tree) {//присваивания
