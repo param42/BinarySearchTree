@@ -91,10 +91,14 @@ public:
 	{
 		size_ = 0;
 		root_ = nullptr;
-		for (const auto& it : list)
+		for (auto it : list)
 		{
 			insert(it);
 		};
+		//for (const auto& it : list)
+		//{
+		//	insert(it);
+		//};
 
 	};
 
