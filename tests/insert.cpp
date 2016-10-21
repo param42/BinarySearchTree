@@ -8,10 +8,10 @@ SCENARIO("If inserting element already exist in tree, insert() must return false
       BinarySearchTree<int> tree { 8,10,3};
       WHEN("Inserting")
       {
-         THEN("Method must return false")
-         {
-            REQUIRE(tree.insert(10) == false);
-         }
+          THEN("throw an exception")
+            {
+                REQUIRE_THROWS_AS(tree.insert(10), BinarySearchTree<int>::except);
+            }
       }
    }
 }
@@ -65,21 +65,7 @@ SCENARIO("If inserting element is bigger than root of the tree, it must be inser
    }
 }
 
-SCENARIO("If inserting element already exist in tree, insert() must not change size of tree")
-{
-   GIVEN("Tree with existing element")
-   {
-      BinarySearchTree<int> tree { 8,10,3};
-      WHEN("Inserting")
-      {
-         tree.insert(10);
-         THEN("Method must not change size of tree")
-         {
-            REQUIRE(tree.size() == 3);
-         }
-      }
-   }
-}
+
 
 SCENARIO("If inserting element does not exist in tree, insert() must increment size of tree")
 {
