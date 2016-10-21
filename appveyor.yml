@@ -3,7 +3,7 @@ platform:
  - x64
  environment:
     matrix: 
-     -VSVER:14
+     - VSVER:14
      
  before_build:
  #POWERSHELL ИНТЕРПРТАТОР 
