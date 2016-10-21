@@ -6,7 +6,7 @@ environment:
     matrix:
         - VSVER: 14
         
- before_build:
+before_build:
  - ps: >-
         If ($env:Platform -Match "x86") {
             $env:VCVARS_PLATFORM="x86"
@@ -21,7 +21,7 @@ environment:
     
 build_script:
 - mkdir build
--cd build
- - cmake .. -G "NMake Makefiles" %CMAKE_PUGIXML_FLAGS% %CMAKE_CURL_FLAGS% %CMAKE_OPENSSL_FLAGS% -DBUILD_SHARED_LIBS=%BUILD_SHARED%
-  - nmake
-  - nmake install
+- cd build
+- cmake .. -G "NMake Makefiles" %CMAKE_PUGIXML_FLAGS% %CMAKE_CURL_FLAGS% %CMAKE_OPENSSL_FLAGS% -DBUILD_SHARED_LIBS=%BUILD_SHARED%
+- nmake
+- nmake install
