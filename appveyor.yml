@@ -7,7 +7,6 @@ environment:
         - VSVER: 14
         
  before_build:
- #POWERSHELL ИНТЕРПРТАТОР 
  - ps: >-
         If ($env:Platform -Match "x86") {
             $env:VCVARS_PLATFORM="x86"
