@@ -34,6 +34,13 @@ template<typename T>
 class BinarySearchTree
 {
 public:
+	
+	class except: public std::logic_error{
+    public:
+        except(const std::string& data, T ) : logic_error(data){}
+  	  };
+
+	
 	class  Node {
 	public:
 		T value_;
@@ -227,16 +234,23 @@ public:
 		return true;
 	}
 
-	bool remove(const T value) {
-		return remove_r(root_, value);
+	bool remove(const T& value) {
+		 if(size_==0)
+		 {
+			throw except("The tree is empty", value);
+		 }
+	 	 else
+		 {	 
+			return remove_r(root_, value);
+		 }
 	}
 
 
-	bool remove_r(std::shared_ptr<Node> node, int value)
+	bool remove_r(std::shared_ptr<Node> node, const T &value)
 	{
 
 		if (node == nullptr)
-			return true;
+			 throw except("This node doesn't exist", value);
 
 		if (value < node->value_)
 			return remove_r(node->left_, value);
