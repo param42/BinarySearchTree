@@ -1,10 +1,11 @@
 platform:
- - x86
- - x64
- environment:
-    matrix: 
-     - VSVER:14
-     
+    - x86
+    - x64
+
+environment:
+    matrix:
+        - VSVER: 14
+        
  before_build:
  #POWERSHELL ИНТЕРПРТАТОР 
  - ps: >-
@@ -20,7 +21,8 @@ platform:
     - call "%VSCOMNTOOLS%\..\..\VC\vcvarsall.bat" %VCVARS_PLATFORM%
     
 build_script:
-- cd %INSTALL_PREFIX%
+- mkdir build
+-cd build
  - cmake .. -G "NMake Makefiles" %CMAKE_PUGIXML_FLAGS% %CMAKE_CURL_FLAGS% %CMAKE_OPENSSL_FLAGS% -DBUILD_SHARED_LIBS=%BUILD_SHARED%
   - nmake
   - nmake install
