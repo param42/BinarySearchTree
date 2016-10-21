@@ -25,7 +25,7 @@ SCENARIO("If element does not exist in tree, find() must return nullptr")
       {
          THEN("Method must return nullptr")
          {
-            REQUIRE(tree.find(7) == nullptr);
+           REQUIRE_THROWS_AS(tree.find(7), BinarySearchTree<int>::except);
          }
       }
    }
